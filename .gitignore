@@ -1,0 +1,48 @@
+HELP.md
+target/
+.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+
+# Properties files
+*.properties
+*.yaml
+!src/test/resources/**/*.yaml
+!compose.yaml
+# Secrets files - ignore all secret.yml files in any directory
+**/*secret.yaml
+**/*secret.yml
+
+deploy.sh
+*.sh
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+src/main/resources/application*.properties
+!src/test/resources/application-test.properties
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+build/
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+### VS Code ###
+.vscode/

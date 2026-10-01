@@ -1,0 +1,10 @@
+src/main/resources/application.yaml
+.git
+.github
+.idea
+.claude
+target
+*.md
+compose.yaml
+*.iml
+.DS_Store

@@ -1,0 +1,73 @@
+auth:
+  frontend:
+    enabled: true
+
+spring:
+  application:
+    name: idp-provider-test
+  flyway:
+    locations: classpath:db/migration
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      maximum-pool-size: 2
+      minimum-idle: 1
+      idle-timeout: 120000
+      max-lifetime: 1800000
+      connection-timeout: 10000
+      keepalive-time: 60000
+  jpa:
+    open-in-view: false
+  configuration:
+    urls: "http://localhost:5173"
+
+google:
+  configuration:
+    client-id: "some-long-fake-token1213457678794784.apps.googleusercontent.com"
+    allowed-domains: "test.com"
+
+jwt:
+  issuer: "test-idp-provider"
+  frontend:
+    audience:
+      - "target-service"
+    access[0]:
+      unit: "MINUTES"
+      expiration: 30
+      key-id: "test-access-v1"
+      private-key-pem: "MIIEvwIBADANBgkqhkiG9w0BAQEFAASCBKkwggSlAgEAAoIBAQDfS7W6za3cQH4KZvfwtzd48ydSuFsmLA/IR2tqhEYfiNjrwLOB2vAKw6pjrf+syJCbU0KNya8QkD+n7Qhsgq8cD/INKdtHPt6TOtSd5P1jQ0qQnb1fzO6FH+t81kNUWsdn2lGfnS/KavsXR5HT8OAl8LJ5A5bkSQ/lFytneJOUIszsPEZFFGLg16z3MatC7nfn2eivKPjd3evqa42K3CNL4ep+ySDdXAQ1+KhFnwiE7BQVoS5oCxzPgQ3d1sDEi77WUS2eL2D2FtXshl4vFKMCC2qxjyt4PaMq5l2pIsSuwd/MbSYG4sMMvc3z+6KgnjaahTnLVld+Toba+LRIw6O1AgMBAAECggEAAgobEeaiMCO5qFF/nGf7/njlaCIYGQg9flQ3/7F6F3x56LtU7bpzcfxkBcQ3fzCXcN0TkPUhih/wfjw8v7Wjhk4spTX3k1YYaoABeaNiChekVR+lChHhMCpAuHOXiqwdQU5TQQc1Qh7J23uonLwzkT0lJX76JZciPp2AehHgnTF+JEcgS00jbCGyltd0V46NthLIff3DiYW6tuFa8mns0eoi8aPpfDwxmzcQy1Fw7D07Fo8/YEA/0j8zCGX1Q6CitTxdLUs/4I61oVlPFOrMm0NNcZwgva7wRZZJ5ba2BD+2K6yP/fJfmpHba2Km7fDopN2DPrx7dqxAbaOS0oU0MQKBgQD2FVfz6XiHKwuVAcnJDVv7j6MhbMZEQIq+dncmTnsGNAxGvVPAzVC7pvtMfglx6x872FhKhQh8ltzp2o1bn/8j6M91mxqTcgJ5IhOF2hslxhW+j87qG6MVA2Oh1GX1xbJzMFn8/vtxkgvs6ks6SYFyaM9DD5vd/COTuvAiy915hQKBgQDoS0iUv//EgAlxJeSLR3jsoGwjfAMtz0jiIo85iaEzZp3sjmCLKM7xIz+k9kdTzl/TTcjvgYSJjliJQlZViBkhs2s7WRx/wukxmy5Er9XgADsU19bX6c2A68nOU7YLjPoA63OjIOivxUUTXUTtGBBKsCosXxxKnI5XWujUc00AcQKBgQDVyK8TOIY8L3otZlNONivt/NhExoHsc4HVe4eBoPah6f+sSPiE7BmyHJv+1RQRgqkszYPOoYpA6rNa+kKKEhKOuMfarPfGlmptn9wEEfo5s7/aQIcKvR3NuJcK1UIK5UhlZ+EVuNLq1G1F0jmuloM9yK4e3WWU0WJ7ChFquV9cHQKBgQCF8hMyItw61JGdOvpkDZx+5ao1c+bpXWNrcf4gcWoQl5VsuFSXKbradTbXymMqwg+janD5GjfwkbIfw67Aty+2rRyiJio2yY9p2U9+r92lwrxOsn7iFaE4O74sSTzpwCrQqPQPFoTWBexk1B1QkdWjG53V5CoOI+Q4HuWuy6WVIQKBgQDwj5iSPv88zdGfevBK3DJ5xLbI8VvjsBgn3ouRSDGx9Fjk7Z21UP7MkB52IXw40yf1PqDUCON1BYnAzy2XZwLNcnoJ9OpvDJ83ye3LaXiEPQa6JK+y6kv68YLyIJLQft4FWriamY7zMEIEJ5RqEovQFhqyK9UxabmVba0Fm5RgRQ=="
+      public-key-pem: "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA30u1us2t3EB+Cmb38Lc3ePMnUrhbJiwPyEdraoRGH4jY68CzgdrwCsOqY63/rMiQm1NCjcmvEJA/p+0IbIKvHA/yDSnbRz7ekzrUneT9Y0NKkJ29X8zuhR/rfNZDVFrHZ9pRn50vymr7F0eR0/DgJfCyeQOW5EkP5RcrZ3iTlCLM7DxGRRRi4Nes9zGrQu5359noryj43d3r6muNitwjS+Hqfskg3VwENfioRZ8IhOwUFaEuaAscz4EN3dbAxIu+1lEtni9g9hbV7IZeLxSjAgtqsY8reD2jKuZdqSLErsHfzG0mBuLDDL3N8/uioJ42moU5y1ZXfk6G2vi0SMOjtQIDAQAB"
+      cookie:
+        name: "access_token"
+        http-only: true
+        secure: true
+        domain:
+        path: "/"
+        same-site: "Strict"
+    refresh[0]:
+      unit: "DAYS"
+      expiration: 10
+      key-id: "test-refresh-v1"
+      private-key-pem: "MIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQC5P4XesD87Fq+uMVAk6aSu9Cr9ypDJ6tmGf6TgbDAu/sWFpjMt/Uf/adhgXZ23LoF0TAXLORBDBKJ/W2jpMyV76MG66RLjQ9wWGQX1zQHEhrcJuPbLwXPW2Ur2SiFh3iHfcsXeUTKFNsa29SlpbkMX95FPBxAEpNam0sxSpaTiAIwtKq3u0j+PRod/Q3UkVpNNx2MNgpPyFLf0reHpwV9q68HH02SgJoWp9867inI1PtlddGRKciNoc+qSN+t78VMq8PTW2BsQ4gUo1iSxOWDQ6nFxzHQUjDsU+10xoQwyLG82yOvwZiywS2TDMTsXa4J6wIZ2uKgYkLSUQfEE5IGtAgMBAAECggEAJWOcVe91u6vfBoX+eozLx+IRQUsewRpNEDf4I7HCYeHbJRf/8XLTEsqeuQh8GiphR4NGkhdw4E3xrEnbWWIQ2TsHyv1a6hLau30OdmeLyUo1bFlwOnzPsBgIaMBaj4HBjXOBW1dBHqEJJ4lA8/4kvZQiuHQg+Ab7Kg2W3sF/D3wbzEg29v1YYWpmNLWyBU87J1DY9g2S0dLg05Hd4VqO3nlnjDxqLBiHwRQpRfKf5bJPCHFOHXe2JGbiBOIncq2I7sS/TFUCMaYoYgyxdb+rKap2cIuTKFo3mzMIUuJmIwNLoFmuk4K5VRJCxTeIT3UdMnJ/y7ni/+gV6qBRZN8GowKBgQDki8uQhq9HVhOU9ws0IZp1JA4uulwmFZkhAiVk59xeiB6edFLu8CBPL3m79dcw5ZNaSKA8rxax3STnQW+SekpfLMRlClobszpKth3pyh9ih26xMrrOj+LT6/8pPo9KmumjTLJLBx2GSpjH2sOYu5ewMN1zQ83LwO8fR9vDg30tEwKBgQDPgDznDtBLIRks+lmWCmxLZrJvWHjAkik6Ny08qXqN4tgrTBIbbomRl9z8gPo8zibIwXdVaV7Cs43Tn4KA9KCkRPnOOOywptCS0UyfsBYdV9djaCqDFHEza3jKmYQO64IvxrkuWAJ8ihIvJPDwNXXY0bxm2b35rT2CUW+rma8uPwKBgGSYG3t7rL6rZmcU7bt+ZuvUeOGcaV7h9sqOlUL6wwZgx4lbDf3Zd38jGGPg61y8T8VXXiAXuNeEzO9039ULOpz1qWQH0G2Mz8V+r1/t9S57Cf+4ony03FQG9gKDZLKjyN51raxUb2xifSjKY3lgaH3GpFJNr9FVFGsiR9qgj4I9AoGBAMMUfy2DwdRAQ9kDbSIgnnutC2ifNrdlMplmsoLrmyq18CGUnRlpLLDSo5JI9/oenlvzd2u3ar2F7Xrd5eWzFywZJPn6jpvt2P2PBIjFFaV0pizxC7a8i0iaa6+d8IfOZlDgdczaNUw8yqfEBTjwKeE0HfpcD70iYEeapHAiRo4lAoGBANMy0MrrnBSPZq6dgNdo2iSJZri9LO0tPZrRvGA3zHs2/cCbuya6ygEYuheOB1F2MHjNqPe9+4tsi6Uz5FA1AeHUsa7qWSG8/fCEhAmnGtErSdZWaz3BqoRDTs7B8oCvTY+XL9mfSO+i0Ii7c1bNRAwPajiY8AHbnZFHE7S9bH1n"
+      public-key-pem: "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAuT+F3rA/OxavrjFQJOmkrvQq/cqQyerZhn+k4GwwLv7FhaYzLf1H/2nYYF2dty6BdEwFyzkQQwSif1to6TMle+jBuukS40PcFhkF9c0BxIa3Cbj2y8Fz1tlK9kohYd4h33LF3lEyhTbGtvUpaW5DF/eRTwcQBKTWptLMUqWk4gCMLSqt7tI/j0aHf0N1JFaTTcdjDYKT8hS39K3h6cFfauvBx9NkoCaFqffOu4pyNT7ZXXRkSnIjaHPqkjfre/FTKvD01tgbEOIFKNYksTlg0Opxccx0FIw7FPtdMaEMMixvNsjr8GYssEtkwzE7F2uCesCGdrioGJC0lEHxBOSBrQIDAQAB"
+      cookie:
+        name: "refresh_token"
+        http-only: true
+        secure: false
+        domain:
+        path: "/api/v1/auth/frontend/refresh"
+        same-site: "Strict"
+
+  services:
+    backend-service:
+      audience:
+        - "example-service"
+      roles:
+        - "READ"
+      client-secret-hash: "$argon2id$v=19$m=24576,t=1,p=1$f376TCgRSWPnDyNnmzVG7w$P/O3Vj+D/dgxpo9RpbAjC79CSOwSJYRiiS+hVozfjJ4"
+      access[0]:
+        unit: "HOURS"
+        expiration: 1
+        key-id: "backend-service-v1"
+        private-key-pem: "MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCb21kKimaj+OzGPTavoaGZjXOgwlWszFN1RcubWttYn1tNTCN++QjBW0jGlRnQ9eRCiy2OBPhHsRi3JEnBpPOT+sFqbwLsYtHnXbnmGXk0DHb4IJcRaFm9UWd/PKPP9PambygcOZ6mcPQ0ZmumxQQ/hRxDWkPwa5ZNzh5nK04bcSqIARRz/CRa0tSAjrZN7rLSIe+1jAXTwTn2emPss6Cvn4SghlEjGNfrFPl9XraykHH4VdmrfC17Sp9TaGCbgstsPbOqfLudR9p2dK+5OLy0AJs9lF1v7Jp4yz2tGjlhDiXj1BttPYrZNkO6acyZnSGo/p7/8LX2ur2Fn/LElTKDAgMBAAECggEAKKA9joTTCmzpcycjqRZNpFP9zuq5IGjGXGxMDXvabzhiuTxeiEtr39LmnnThHNnrnPjgcAOVoEJmed6opyRTJcCYSCEVtv5vTorc2UDMmiehnz4Hgs8bjUC55K2u2Zc1795Lq0fNtf79eOc1qmvylogg/OF7kiDJNhDDVgswufAWg3BmevRZ4thuxKPuRn/hJSw//gRdKxDU0vdF/b/pAL5MPm/8yl9Iqu0jzdVZbiyvIeTbamjPIHVleeWpvMmgqL/PiFEaWnjZEusz5cH6huSjiX46S7RJzDzdon+3PS4YgfXaM+C6NvxkiJx6X5g+bfPJYKB7snvP3smcQKd8MQKBgQDNkzQMRVM18ToCdDMG9zz6zjhvaurtOvhFchZJ6adrFVKLg/Ldx4rSNWlzcS8eSsGilm0u+/+zRfc/HtXqLx3iZnTMkqKOLbrgdgojH0BfvnA/hYgI9CZTJqVROQZ742PxuywmNhfr3jKrcI/h2rvJOwrKKcWjw4s2ebI9OIozywKBgQDCFikHtl9efL5s4QYtkkZd67RQhznXlSS6nZhuorTU66NpGnl6IDIKLBbuDGiNRz4Hb2VnGJ9Lx1pj24Kg03mdHVXPAmIeCW92LSEXn73TKwPn/2nUJbfXAq8qCf0Gn1j8dM7MWoOf6fdb2exVpvgIibuOKHTitfzivB9qfrHVKQKBgQCLojgROal6k16GuizKx3apGRfmPiZSeuKWMRcIn2ezaalG0JpPoDEf9V2qJzANEFQUPr7s0ght2dFGE4jTZ6uR02v0ZIl7r34m5qaeEqUkI3OVAftTsZqykiZqVCSeU+bYE/25+rYm5SdfobZpf6xb0/nRNaxkPvc5SlISGWxuHwKBgAmFasfdE3qgJftTYqkzps4OtQ7KQ3Um9OFOv96VjsdvM9oBGXp7P9kt5oYRB8P+fbWBqnjPRWlDQ1TovNTE6w9hFAeOt19/2P70Ic514KsOTifAaOGmZAlhMVSfntEHWicwV8DAo/phUOgpnaVqBnrsvs2vgGRqxxgcYHIp+vFZAoGAHIaMmwrIseDqZRS4iitJ2RnFtPe8PkgZUVY7Wy21UJg+KGGVzARlhxMgXaLTaJ8CoaKXzmn84ZDdjDXAoSCtlMEAKpi6AX4Y/HF2zoheOWdER2d6IY4vpXZEmtBVBWQihc6kaNGd53uB73xStheoKqo7Dow5gf0nJrZEgBN2+QU="
+        public-key-pem: "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAm9tZCopmo/jsxj02r6GhmY1zoMJVrMxTdUXLm1rbWJ9bTUwjfvkIwVtIxpUZ0PXkQostjgT4R7EYtyRJwaTzk/rBam8C7GLR51255hl5NAx2+CCXEWhZvVFnfzyjz/T2pm8oHDmepnD0NGZrpsUEP4UcQ1pD8GuWTc4eZytOG3EqiAEUc/wkWtLUgI62Te6y0iHvtYwF08E59npj7LOgr5+EoIZRIxjX6xT5fV62spBx+FXZq3wte0qfU2hgm4LLbD2zqny7nUfadnSvuTi8tACbPZRdb+yaeMs9rRo5YQ4l49QbbT2K2TZDumnMmZ0hqP6e//C19rq9hZ/yxJUygwIDAQAB"

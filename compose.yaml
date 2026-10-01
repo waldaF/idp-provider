@@ -1,0 +1,25 @@
+services:
+  postgres:
+    image: 'postgres:18-alpine'
+    container_name: identity-db
+    environment:
+      - 'POSTGRES_DB=identity_db'
+      - 'POSTGRES_PASSWORD=test'
+      - 'POSTGRES_USER=test'
+    ports:
+      - '5432:5432'
+    volumes:
+      - identity_data:/var/lib/postgresql/data
+    deploy:
+      resources:
+        limits:
+          cpus: '0.2'
+          memory: 128M
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U test -d identity_db"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+volumes:
+  identity_data:
